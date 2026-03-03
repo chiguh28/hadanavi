@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -34,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={`${notoSansJP.variable} antialiased`}>
+        <GoogleAnalytics />
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />

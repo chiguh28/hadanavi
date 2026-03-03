@@ -35,8 +35,8 @@ export default function RoutineSteps({ steps, title }: RoutineStepsProps) {
             {/* Product cards */}
             {step.products.length > 0 ? (
               <div className="space-y-4 pl-4 md:pl-11">
-                {step.products.map((product) => (
-                  <ProductCard key={product.name} product={product} />
+                {step.products.map((product, idx) => (
+                  <ProductCard key={product.name} product={product} step={step.step} position={idx} />
                 ))}
               </div>
             ) : (

@@ -1,10 +1,22 @@
 import Link from "next/link";
 import Button from "@/components/common/Button";
 import Card from "@/components/common/Card";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  generateWebSiteSchema,
+  generateBreadcrumbList,
+} from "@/lib/seo/structured-data";
 
 export default function Home() {
+  const webSiteSchema = generateWebSiteSchema();
+  const breadcrumbSchema = generateBreadcrumbList([
+    { name: "ホーム", url: "https://hadanavi.vercel.app" },
+  ]);
+
   return (
     <div className="bg-background">
+      <JsonLd data={webSiteSchema} />
+      <JsonLd data={breadcrumbSchema} />
       {/* Hero section */}
       <section className="bg-primary-light px-4 py-16 text-center">
         <h1 className="mb-4 text-3xl font-bold leading-tight text-foreground md:text-4xl">

@@ -1,0 +1,2183 @@
+{
+  "version": "3.0.0",
+  "updated_at": "2026-03-03",
+  "changelog": [
+    "v2.0: 化粧品成分専門家レビュー反映",
+    "- 全商品にexclude_skin_types, sensitivity_safeフラグ追加",
+    "- 日焼け止めにuv_filter_type追加",
+    "- 高濃度成分にconcentration_note追加",
+    "- evidence_level追加（医薬部外品/機能性表示/一般化粧品）",
+    "- 乾燥肌洗顔: ロゼット荒性肌(イオウ)→ミノン フェイシャルウォッシュに差替",
+    "- 混合肌クレンジング: ジェルを第一候補に順序変更",
+    "- ニベアクリームのingredients_highlight修正（オクルーシブ効果）",
+    "- 美容液に敏感肌向け代替品カテゴリ追加",
+    "- The Ordinary 10%ナイアシンアミドに敏感肌除外フラグ追加",
+    "v3.0: 化粧品検定1級・薬機法・成分科学3名レビュー反映",
+    "- キュレル全製品: セラミド表記を「疑似セラミド」に修正",
+    "- 全セラミド含有商品にceramide_typeフィールド追加",
+    "- 医薬部外品にactive_ingredient（有効成分名）追加",
+    "- 海外ブランドにorigin, regulatory_note追加",
+    "- 一般化粧品のkey_pointで薬機法グレー表現を修正",
+    "- ingredients_highlightをユーザー向け一般名に統一、inci_name追加",
+    "- カウブランドのセラミド種類を確認・修正",
+    "- キュレル化粧水のingredients_highlight: ユーカリエキス→疑似セラミド+ユーカリエキスに修正"
+  ],
+  "disclaimer": "本データは一般的なスキンケア情報であり、医療的なアドバイスではありません。肌トラブルが深刻な場合は皮膚科を受診してください。商品の成分は変更される場合があります。使用前にパッチテストを推奨します。",
+  "diagnosis_questions": [
+    {
+      "id": "q1",
+      "question": "洗顔後、何もつけずに10分放置したときの肌の状態は？",
+      "options": [
+        {
+          "label": "顔全体がつっぱる・カサつく",
+          "scores": {
+            "dry": 3,
+            "oily": 0,
+            "combination": 0,
+            "sensitive": 1,
+            "normal": 0
+          }
+        },
+        {
+          "label": "顔全体がベタつく・テカる",
+          "scores": {
+            "dry": 0,
+            "oily": 3,
+            "combination": 0,
+            "sensitive": 0,
+            "normal": 0
+          }
+        },
+        {
+          "label": "Tゾーンはベタつくが頬はつっぱる",
+          "scores": {
+            "dry": 0,
+            "oily": 0,
+            "combination": 3,
+            "sensitive": 0,
+            "normal": 0
+          }
+        },
+        {
+          "label": "特にベタつきもつっぱりもない",
+          "scores": {
+            "dry": 0,
+            "oily": 0,
+            "combination": 0,
+            "sensitive": 0,
+            "normal": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "日中のメイク崩れの状態は？",
+      "options": [
+        {
+          "label": "ファンデが割れる・粉っぽくなる",
+          "scores": {
+            "dry": 3,
+            "oily": 0,
+            "combination": 1,
+            "sensitive": 1,
+            "normal": 0
+          }
+        },
+        {
+          "label": "Tゾーン中心にドロドロ崩れる",
+          "scores": {
+            "dry": 0,
+            "oily": 3,
+            "combination": 2,
+            "sensitive": 0,
+            "normal": 0
+          }
+        },
+        {
+          "label": "鼻だけテカるが頬は乾く",
+          "scores": {
+            "dry": 0,
+            "oily": 0,
+            "combination": 3,
+            "sensitive": 0,
+            "normal": 0
+          }
+        },
+        {
+          "label": "あまり崩れない",
+          "scores": {
+            "dry": 0,
+            "oily": 0,
+            "combination": 0,
+            "sensitive": 0,
+            "normal": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "新しい化粧品を使ったとき、肌に刺激を感じることは？",
+      "options": [
+        {
+          "label": "よくある（赤み・ピリつき・かゆみ）",
+          "scores": {
+            "dry": 0,
+            "oily": 0,
+            "combination": 0,
+            "sensitive": 3,
+            "normal": 0
+          }
+        },
+        {
+          "label": "たまにある",
+          "scores": {
+            "dry": 1,
+            "oily": 0,
+            "combination": 0,
+            "sensitive": 1,
+            "normal": 0
+          }
+        },
+        {
+          "label": "ほとんどない",
+          "scores": {
+            "dry": 0,
+            "oily": 0,
+            "combination": 0,
+            "sensitive": 0,
+            "normal": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "毛穴の状態で気になるのは？",
+      "options": [
+        {
+          "label": "毛穴は目立たないが乾燥小ジワが気になる",
+          "scores": {
+            "dry": 3,
+            "oily": 0,
+            "combination": 0,
+            "sensitive": 1,
+            "normal": 0
+          }
+        },
+        {
+          "label": "鼻・頬の毛穴が開いている・黒ずむ",
+          "scores": {
+            "dry": 0,
+            "oily": 3,
+            "combination": 2,
+            "sensitive": 0,
+            "normal": 0
+          }
+        },
+        {
+          "label": "Tゾーンだけ毛穴が目立つ",
+          "scores": {
+            "dry": 0,
+            "oily": 1,
+            "combination": 3,
+            "sensitive": 0,
+            "normal": 0
+          }
+        },
+        {
+          "label": "特に気にならない",
+          "scores": {
+            "dry": 0,
+            "oily": 0,
+            "combination": 0,
+            "sensitive": 0,
+            "normal": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "季節の変わり目に肌の調子が変わる？",
+      "options": [
+        {
+          "label": "冬に特にカサカサ・粉ふきする",
+          "scores": {
+            "dry": 2,
+            "oily": 0,
+            "combination": 0,
+            "sensitive": 1,
+            "normal": 0
+          }
+        },
+        {
+          "label": "夏にベタつき・ニキビが増える",
+          "scores": {
+            "dry": 0,
+            "oily": 2,
+            "combination": 1,
+            "sensitive": 0,
+            "normal": 0
+          }
+        },
+        {
+          "label": "季節ごとに乾燥もテカリも変わる",
+          "scores": {
+            "dry": 0,
+            "oily": 0,
+            "combination": 2,
+            "sensitive": 1,
+            "normal": 0
+          }
+        },
+        {
+          "label": "あまり変わらない",
+          "scores": {
+            "dry": 0,
+            "oily": 0,
+            "combination": 0,
+            "sensitive": 0,
+            "normal": 2
+          }
+        }
+      ]
+    }
+  ],
+  "skin_types": {
+    "dry": {
+      "id": "dry",
+      "name": "乾燥肌",
+      "description": "水分・油分ともに不足しやすい肌タイプ。バリア機能が低下しやすく、外部刺激に敏感になりがち。",
+      "characteristics": [
+        "つっぱり感",
+        "カサつき・粉ふき",
+        "小ジワが目立ちやすい",
+        "毛穴は小さめ",
+        "キメは細かいが乾きやすい"
+      ],
+      "care_priority": "水分と油分をバランスよくたっぷり補給し、蓋をして逃さないケアが重要",
+      "ng_actions": [
+        "洗浄力の強いクレンジング・洗顔",
+        "アルコール含有量の多い化粧水",
+        "保湿の手抜き"
+      ],
+      "recommended_ingredients": [
+        "セラミド",
+        "ヒアルロン酸",
+        "スクワラン",
+        "シアバター",
+        "アミノ酸"
+      ],
+      "caution_ingredients": [
+        "高濃度レチノール",
+        "高濃度ビタミンC（刺激になる場合あり）",
+        "アルコール（エタノール）"
+      ]
+    },
+    "oily": {
+      "id": "oily",
+      "name": "脂性肌",
+      "description": "皮脂分泌が活発で水分量も比較的多い肌タイプ。毛穴の開き・ニキビに悩みやすい。",
+      "characteristics": [
+        "顔全体のテカリ・ベタつき",
+        "毛穴の開き・黒ずみ",
+        "ニキビ・吹き出物ができやすい",
+        "化粧崩れしやすい"
+      ],
+      "care_priority": "余分な皮脂を落としつつ、水分補給はしっかり行い油水分バランスを整える",
+      "ng_actions": [
+        "過度な洗顔（1日3回以上）",
+        "油分の多すぎるクリーム",
+        "保湿をサボる（インナードライの原因に）"
+      ],
+      "recommended_ingredients": [
+        "ナイアシンアミド",
+        "サリチル酸（BHA）",
+        "ティーツリー",
+        "ビタミンC誘導体",
+        "CICA"
+      ],
+      "caution_ingredients": [
+        "重めのオイル（ミネラルオイル等）",
+        "シリコン系下地の重ね塗り"
+      ]
+    },
+    "combination": {
+      "id": "combination",
+      "name": "混合肌",
+      "description": "Tゾーン（額・鼻）は脂っぽく、Uゾーン（頬・顎）は乾燥する、最も多い肌タイプ。",
+      "characteristics": [
+        "Tゾーンのテカリ",
+        "頬・口元の乾燥",
+        "部位によって毛穴の目立ち方が違う",
+        "季節で肌質が変わりやすい"
+      ],
+      "care_priority": "部位に合わせたゾーンケアが理想。全体は保湿しつつ、Tゾーンは軽めに",
+      "ng_actions": [
+        "全顔同じケアだけで済ませる",
+        "Tゾーンの脂を取りすぎる",
+        "Uゾーンの保湿不足"
+      ],
+      "recommended_ingredients": [
+        "ナイアシンアミド",
+        "ヒアルロン酸",
+        "セラミド",
+        "ビタミンC誘導体"
+      ],
+      "caution_ingredients": [
+        "Uゾーンへの高濃度酸系成分（BHA等）"
+      ]
+    },
+    "sensitive": {
+      "id": "sensitive",
+      "name": "敏感肌",
+      "description": "バリア機能が低下し、外部刺激に過敏に反応しやすい肌タイプ。赤み・ピリつきが出やすい。",
+      "characteristics": [
+        "化粧品で赤み・ピリつきが出やすい",
+        "季節の変わり目に荒れやすい",
+        "花粉・マスクで肌荒れ",
+        "バリア機能が弱い"
+      ],
+      "care_priority": "低刺激・シンプルケアでバリア機能を立て直すことが最優先",
+      "ng_actions": [
+        "成分数の多いアイテムの重ね塗り",
+        "ピーリング・スクラブの頻用",
+        "アルコール・香料入りの化粧品",
+        "高濃度の活性成分（レチノール・高濃度ビタミンC・高濃度ナイアシンアミド等）"
+      ],
+      "recommended_ingredients": [
+        "セラミド",
+        "CICA（ツボクサエキス）",
+        "アラントイン",
+        "パンテノール",
+        "マデカッソシド"
+      ],
+      "caution_ingredients": [
+        "高濃度ナイアシンアミド（10%以上）",
+        "高濃度ビタミンC（15%以上）",
+        "レチノール",
+        "AHA/BHA（高濃度）",
+        "エタノール",
+        "合成香料"
+      ]
+    },
+    "normal": {
+      "id": "normal",
+      "name": "普通肌",
+      "description": "水分と油分のバランスが取れた理想的な肌状態。トラブルは少ないが油断は禁物。",
+      "characteristics": [
+        "テカリもカサつきも少ない",
+        "キメが整っている",
+        "肌トラブルが少ない",
+        "化粧ノリが良い"
+      ],
+      "care_priority": "現状の良いバランスを維持するベーシックケア。季節に合わせた微調整を",
+      "ng_actions": [
+        "ケアのサボり",
+        "過度なケア（やりすぎ）",
+        "日焼け止めを塗らない"
+      ],
+      "recommended_ingredients": [
+        "ヒアルロン酸",
+        "ビタミンC誘導体",
+        "ナイアシンアミド",
+        "レチノール"
+      ],
+      "caution_ingredients": []
+    }
+  },
+  "concerns": {
+    "dryness": {
+      "id": "dryness",
+      "name": "乾燥",
+      "icon": "💧",
+      "description": "肌のカサつき・つっぱり・粉ふき"
+    },
+    "pores": {
+      "id": "pores",
+      "name": "毛穴",
+      "icon": "🔍",
+      "description": "毛穴の開き・黒ずみ・角栓"
+    },
+    "acne": {
+      "id": "acne",
+      "name": "ニキビ",
+      "icon": "🔴",
+      "description": "ニキビ・吹き出物・肌荒れ"
+    },
+    "dullness": {
+      "id": "dullness",
+      "name": "くすみ",
+      "icon": "☁️",
+      "description": "肌のくすみ・透明感の低下"
+    },
+    "spots": {
+      "id": "spots",
+      "name": "シミ",
+      "icon": "🟤",
+      "description": "シミ・そばかす・色素沈着"
+    },
+    "aging": {
+      "id": "aging",
+      "name": "ハリ不足",
+      "icon": "📉",
+      "description": "ハリ・弾力の低下・たるみ"
+    },
+    "redness": {
+      "id": "redness",
+      "name": "赤み",
+      "icon": "🌡️",
+      "description": "肌の赤み・ほてり・炎症"
+    },
+    "oiliness": {
+      "id": "oiliness",
+      "name": "テカリ",
+      "icon": "✨",
+      "description": "皮脂によるテカリ・ベタつき"
+    }
+  },
+  "routines": {
+    "morning": {
+      "name": "朝のルーティン",
+      "steps": [
+        "cleansing_morning",
+        "toner",
+        "serum",
+        "moisturizer",
+        "sunscreen"
+      ]
+    },
+    "evening": {
+      "name": "夜のルーティン",
+      "steps": [
+        "cleansing_evening",
+        "face_wash",
+        "toner",
+        "serum",
+        "moisturizer"
+      ]
+    }
+  },
+  "steps": {
+    "cleansing_evening": {
+      "id": "cleansing_evening",
+      "name": "クレンジング",
+      "order": 1,
+      "timing": "evening",
+      "purpose": "メイクや日焼け止め、皮脂汚れを落とす",
+      "how_to": "適量を手に取り、顔全体にやさしくなじませてからぬるま湯で洗い流す。ゴシゴシこすらない。",
+      "skip_condition": "メイクをしていない日はスキップ可。日焼け止めを塗った日は必須。"
+    },
+    "cleansing_morning": {
+      "id": "cleansing_morning",
+      "name": "朝洗顔",
+      "order": 1,
+      "timing": "morning",
+      "purpose": "寝ている間の皮脂・汗を落とし、スキンケアの浸透を高める",
+      "how_to": "ぬるま湯洗顔でOKな人も。皮脂が多い人は泡洗顔を。乾燥肌の人はぬるま湯のみでも◎"
+    },
+    "face_wash": {
+      "id": "face_wash",
+      "name": "洗顔",
+      "order": 2,
+      "timing": "evening",
+      "purpose": "クレンジングで落としきれなかった汚れや古い角質を除去",
+      "how_to": "たっぷりの泡で肌をこすらず、泡を転がすように洗う。30秒〜1分程度でぬるま湯ですすぐ。"
+    },
+    "toner": {
+      "id": "toner",
+      "name": "化粧水",
+      "order": 3,
+      "timing": "both",
+      "purpose": "肌に水分を補給し、キメを整え次のステップの浸透を高める",
+      "how_to": "手のひらに適量を取り、顔全体にハンドプレスで浸透させる。乾燥が気になる部分は重ねづけ。"
+    },
+    "serum": {
+      "id": "serum",
+      "name": "美容液",
+      "order": 4,
+      "timing": "both",
+      "purpose": "肌悩みに特化した集中ケア。有効成分を届ける",
+      "how_to": "適量を手に取り、気になる部位を中心に顔全体にやさしくなじませる。"
+    },
+    "moisturizer": {
+      "id": "moisturizer",
+      "name": "乳液・クリーム",
+      "order": 5,
+      "timing": "both",
+      "purpose": "水分の蒸発を防ぎ、潤いに蓋をして保湿力を持続させる",
+      "how_to": "適量を顔全体に伸ばし、特に乾燥しやすい目元・口元にはやさしく重ねづけ。"
+    },
+    "sunscreen": {
+      "id": "sunscreen",
+      "name": "日焼け止め",
+      "order": 6,
+      "timing": "morning",
+      "purpose": "紫外線からの肌ダメージを防ぎ、シミ・シワ・たるみを予防",
+      "how_to": "適量（500円玉大）を顔全体にムラなく塗る。2〜3時間おきに塗り直しが理想。"
+    }
+  },
+  "product_recommendations": {
+    "cleansing_evening": {
+      "dry": [
+        {
+          "name": "カウブランド 無添加メイク落としミルク",
+          "brand": "カウブランド",
+          "price": 880,
+          "size": "150ml",
+          "type": "ミルク",
+          "key_point": "無添加・低刺激で乾燥肌に優しい。ミルクタイプでうるおいを奪わない",
+          "ingredients_highlight": "セラミド（天然由来/植物性セラミド）（天然由来保湿成分）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "カウブランド 無添加 メイク落としミルク",
+          "ceramide_type": "plant",
+          "inci_name": "セレブロシド等（天然由来セラミド前駆体）"
+        },
+        {
+          "name": "ソフティモ スピーディ クレンジングクリーム",
+          "brand": "KOSE",
+          "price": 600,
+          "size": "210g",
+          "type": "クリーム",
+          "key_point": "クリームがじんわりメイクを浮かせる。しっとり洗い上がり",
+          "ingredients_highlight": "ホホバオイル・スクワラン",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ソフティモ クレンジングクリーム",
+          "inci_name": ""
+        },
+        {
+          "name": "ビオレ ピュアスキンクレンズ",
+          "brand": "ビオレ",
+          "price": 700,
+          "size": "230ml",
+          "type": "ジェル",
+          "key_point": "保湿セラミドケアしながらメイクオフ",
+          "ingredients_highlight": "セラミド",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ビオレ ピュアスキンクレンズ",
+          "inci_name": ""
+        }
+      ],
+      "oily": [
+        {
+          "name": "ファンケル マイルドクレンジングオイル",
+          "brand": "ファンケル",
+          "price": 1870,
+          "size": "120ml",
+          "type": "オイル",
+          "key_point": "毛穴の角栓まで溶かして落とす。するんとオフなのに潤いキープ",
+          "ingredients_highlight": "無添加（防腐剤・香料・合成色素・石油系界面活性剤・紫外線吸収剤不使用）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ファンケル マイルドクレンジングオイル",
+          "inci_name": ""
+        },
+        {
+          "name": "ビオレ メイクとろりんなで落ちジェル",
+          "brand": "ビオレ",
+          "price": 800,
+          "size": "170g",
+          "type": "ジェル",
+          "key_point": "こすらず落ちるジェルタイプ。皮脂汚れもスッキリ",
+          "ingredients_highlight": "アミノ酸系洗浄成分",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ビオレ メイクとろりんなで落ちジェル",
+          "inci_name": "ココイルグルタミン酸等（アミノ酸系界面活性剤）"
+        },
+        {
+          "name": "ちふれ クレンジングオイル",
+          "brand": "ちふれ",
+          "price": 770,
+          "size": "220ml",
+          "type": "オイル",
+          "key_point": "大容量で高コスパ。しっかりメイクも素早くオフ",
+          "ingredients_highlight": "ミネラルオイル",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "ちふれ クレンジングオイル",
+          "inci_name": ""
+        }
+      ],
+      "combination": [
+        {
+          "name": "無印良品 マイルドジェルクレンジング",
+          "brand": "無印良品",
+          "price": 750,
+          "size": "200g",
+          "type": "ジェル",
+          "key_point": "ジェルタイプで洗浄力と保湿のバランスが良い。混合肌の第一候補",
+          "ingredients_highlight": "ヒアルロン酸・リピジュア",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "無印良品 マイルドジェルクレンジング",
+          "inci_name": "ヒアルロン酸Na等"
+        },
+        {
+          "name": "ビオレ ピュアスキンクレンズ",
+          "brand": "ビオレ",
+          "price": 700,
+          "size": "230ml",
+          "type": "ジェル",
+          "key_point": "うるおいを守るセラミドケア処方。Uゾーンにも優しい",
+          "ingredients_highlight": "セラミド",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ビオレ ピュアスキンクレンズ",
+          "inci_name": ""
+        },
+        {
+          "name": "ファンケル マイルドクレンジングオイル",
+          "brand": "ファンケル",
+          "price": 1870,
+          "size": "120ml",
+          "type": "オイル",
+          "key_point": "角栓ケアしつつ乾燥部分もつっぱらないマイルド設計",
+          "ingredients_highlight": "無添加",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ファンケル マイルドクレンジングオイル",
+          "inci_name": ""
+        }
+      ],
+      "sensitive": [
+        {
+          "name": "カウブランド 無添加メイク落としミルク",
+          "brand": "カウブランド",
+          "price": 880,
+          "size": "150ml",
+          "type": "ミルク",
+          "key_point": "着色料・香料・防腐剤・品質安定剤 無添加。敏感肌設計",
+          "ingredients_highlight": "セラミド（天然由来/植物性セラミド）（天然由来保湿成分）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "カウブランド 無添加 メイク落としミルク",
+          "ceramide_type": "plant",
+          "inci_name": "セレブロシド等（天然由来セラミド前駆体）"
+        },
+        {
+          "name": "キュレル ジェルメイク落とし",
+          "brand": "キュレル",
+          "price": 1100,
+          "size": "130g",
+          "type": "ジェル",
+          "key_point": "セラミドケアしながら優しくメイクオフ。肌荒れ防止成分配合",
+          "ingredients_highlight": "疑似セラミド（花王独自セラミド機能成分）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "キュレル ジェルメイク落とし",
+          "ceramide_type": "pseudo",
+          "inci_name": "ヘキサデシロキシPGヒドロキシエチルヘキサデカナミド（疑似セラミド）",
+          "active_ingredient": "—（一般化粧品扱いの場合あり）"
+        },
+        {
+          "name": "ミノン アミノモイスト ミルキィクレンジング",
+          "brand": "ミノン",
+          "price": 1650,
+          "size": "100g",
+          "type": "ミルク",
+          "key_point": "アミノ酸系の優しい洗浄。バリア機能を守る",
+          "ingredients_highlight": "アミノ酸系洗浄成分",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ミノン アミノモイスト ミルキィクレンジング",
+          "active_ingredient": "—",
+          "inci_name": "ココイルグルタミン酸等（アミノ酸系界面活性剤）"
+        }
+      ],
+      "normal": [
+        {
+          "name": "無印良品 マイルドオイルクレンジング",
+          "brand": "無印良品",
+          "price": 750,
+          "size": "200ml",
+          "type": "オイル",
+          "key_point": "オリーブオイル・ホホバオイル配合で肌を労わりながらオフ",
+          "ingredients_highlight": "天然オイル（オリーブ・ホホバ）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "無印良品 マイルドオイルクレンジング",
+          "inci_name": ""
+        },
+        {
+          "name": "ファンケル マイルドクレンジングオイル",
+          "brand": "ファンケル",
+          "price": 1870,
+          "size": "120ml",
+          "type": "オイル",
+          "key_point": "どの肌タイプにも合う万能クレンジング",
+          "ingredients_highlight": "無添加",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ファンケル マイルドクレンジングオイル",
+          "inci_name": ""
+        }
+      ]
+    },
+    "face_wash": {
+      "dry": [
+        {
+          "name": "ミノン フェイシャルウォッシュ",
+          "brand": "ミノン",
+          "price": 1320,
+          "size": "100ml",
+          "type": "泡",
+          "key_point": "植物性アミノ酸系洗浄で皮脂を取りすぎない。乾燥肌・敏感肌向け設計",
+          "ingredients_highlight": "アミノ酸系洗浄成分",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ミノン フェイシャルウォッシュ",
+          "active_ingredient": "グリチルリチン酸2K（抗炎症）",
+          "inci_name": "ココイルグルタミン酸等（アミノ酸系界面活性剤）"
+        },
+        {
+          "name": "カウブランド 無添加うるおい洗顔",
+          "brand": "カウブランド",
+          "price": 550,
+          "size": "110g",
+          "type": "フォーム",
+          "key_point": "セラミド配合でうるおいを守りながら洗える。無添加処方",
+          "ingredients_highlight": "セラミド（天然由来/植物性セラミド）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "カウブランド 無添加 うるおい洗顔",
+          "ceramide_type": "plant",
+          "inci_name": "セレブロシド等（天然由来セラミド前駆体）"
+        },
+        {
+          "name": "キュレル 泡洗顔料",
+          "brand": "キュレル",
+          "price": 1320,
+          "size": "150ml",
+          "type": "泡",
+          "key_point": "ポンプ式の泡洗顔。セラミドを守りながら汚れをオフ",
+          "ingredients_highlight": "疑似セラミド（花王独自セラミド機能成分）・グリチルリチン酸2K（消炎剤）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "キュレル 泡洗顔料",
+          "ceramide_type": "pseudo",
+          "inci_name": "ヘキサデシロキシPGヒドロキシエチルヘキサデカナミド（疑似セラミド）",
+          "active_ingredient": "グリチルリチン酸2K（消炎/抗炎症）"
+        }
+      ],
+      "oily": [
+        {
+          "name": "ロゼット 洗顔パスタ 海泥スムース",
+          "brand": "ロゼット",
+          "price": 500,
+          "size": "120g",
+          "type": "ペースト",
+          "key_point": "海泥（ミネラルクレイ）が毛穴汚れを吸着。さっぱり洗い上がり",
+          "ingredients_highlight": "海泥（吸着洗浄）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "ロゼット 洗顔パスタ 海泥スムース",
+          "inci_name": "海シルト（Sea Silt）"
+        },
+        {
+          "name": "オバジC 酵素洗顔パウダー",
+          "brand": "オバジ",
+          "price": 1980,
+          "size": "0.4g×30個",
+          "type": "パウダー",
+          "key_point": "ビタミンC配合の酵素洗顔。毛穴の黒ずみ・ザラつきをケア",
+          "ingredients_highlight": "ビタミンC・タンパク質分解酵素（プロテアーゼ）",
+          "concentration_note": "酵素洗顔のため毎日使用は非推奨。週2-3回が目安",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive",
+            "dry"
+          ],
+          "amazon_search": "オバジC 酵素洗顔パウダー",
+          "inci_name": "アスコルビン酸 / 3-O-エチルアスコルビン酸等"
+        },
+        {
+          "name": "ロゼット 洗顔パスタ ガスールブライト",
+          "brand": "ロゼット",
+          "price": 500,
+          "size": "120g",
+          "type": "ペースト",
+          "key_point": "モロッコ産ガスール（粘土）が余分な皮脂をしっかり吸着",
+          "ingredients_highlight": "ガスール（モロッコ溶岩クレイ）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "ロゼット 洗顔パスタ ガスールブライト",
+          "inci_name": "モロッコ溶岩クレイ（Ghassoul）"
+        }
+      ],
+      "combination": [
+        {
+          "name": "ロゼット 洗顔パスタ 海泥スムース",
+          "brand": "ロゼット",
+          "price": 500,
+          "size": "120g",
+          "type": "ペースト",
+          "key_point": "Tゾーンの毛穴汚れを吸着しつつ頬はつっぱりにくい",
+          "ingredients_highlight": "海泥（吸着洗浄）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "ロゼット 洗顔パスタ 海泥スムース",
+          "inci_name": "海シルト（Sea Silt）"
+        },
+        {
+          "name": "ビオレ マシュマロホイップ モイスチャー",
+          "brand": "ビオレ",
+          "price": 500,
+          "size": "150ml",
+          "type": "泡",
+          "key_point": "濃密泡が毛穴汚れをからめ取りつつ、うるおいキープ",
+          "ingredients_highlight": "SPT（肌清浄化技術）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ビオレ マシュマロホイップ モイスチャー",
+          "inci_name": ""
+        },
+        {
+          "name": "無印良品 マイルド洗顔フォーム",
+          "brand": "無印良品",
+          "price": 580,
+          "size": "200g",
+          "type": "フォーム",
+          "key_point": "バランスの良い洗浄力。大容量高コスパ",
+          "ingredients_highlight": "天然うるおい成分",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "無印良品 マイルド洗顔フォーム",
+          "inci_name": ""
+        }
+      ],
+      "sensitive": [
+        {
+          "name": "キュレル 泡洗顔料",
+          "brand": "キュレル",
+          "price": 1320,
+          "size": "150ml",
+          "type": "泡",
+          "key_point": "弱酸性・無香料・無着色。消炎剤配合で肌荒れを防ぐ",
+          "ingredients_highlight": "疑似セラミド（花王独自セラミド機能成分）・グリチルリチン酸2K（消炎剤）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "キュレル 泡洗顔料",
+          "ceramide_type": "pseudo",
+          "inci_name": "ヘキサデシロキシPGヒドロキシエチルヘキサデカナミド（疑似セラミド）",
+          "active_ingredient": "グリチルリチン酸2K（消炎/抗炎症）"
+        },
+        {
+          "name": "ミノン フェイシャルウォッシュ",
+          "brand": "ミノン",
+          "price": 1320,
+          "size": "100ml",
+          "type": "泡",
+          "key_point": "植物性アミノ酸系洗浄。泡切れが良く肌に残りにくい",
+          "ingredients_highlight": "アミノ酸系洗浄成分",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ミノン フェイシャルウォッシュ",
+          "active_ingredient": "グリチルリチン酸2K（抗炎症）",
+          "inci_name": "ココイルグルタミン酸等（アミノ酸系界面活性剤）"
+        },
+        {
+          "name": "カウブランド 無添加泡の洗顔料",
+          "brand": "カウブランド",
+          "price": 600,
+          "size": "200ml",
+          "type": "泡",
+          "key_point": "着色料・香料・防腐剤・品質安定剤・鉱物油不使用",
+          "ingredients_highlight": "セラミド（天然由来/植物性セラミド）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "カウブランド 無添加 泡の洗顔料",
+          "ceramide_type": "plant",
+          "inci_name": "セレブロシド等（天然由来セラミド前駆体）"
+        }
+      ],
+      "normal": [
+        {
+          "name": "ビオレ マシュマロホイップ モイスチャー",
+          "brand": "ビオレ",
+          "price": 500,
+          "size": "150ml",
+          "type": "泡",
+          "key_point": "ふわふわ泡で気持ちよく洗える万能洗顔",
+          "ingredients_highlight": "SPT（肌清浄化技術）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ビオレ マシュマロホイップ",
+          "inci_name": ""
+        },
+        {
+          "name": "無印良品 マイルド洗顔フォーム",
+          "brand": "無印良品",
+          "price": 580,
+          "size": "200g",
+          "type": "フォーム",
+          "key_point": "シンプル処方で肌質を選ばない",
+          "ingredients_highlight": "天然うるおい成分",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "無印良品 マイルド洗顔フォーム",
+          "inci_name": ""
+        }
+      ]
+    },
+    "toner": {
+      "dry": [
+        {
+          "name": "セザンヌ スキンコンディショナー高保湿",
+          "brand": "セザンヌ",
+          "price": 715,
+          "size": "500ml",
+          "type": "化粧水",
+          "key_point": "大容量でバシャバシャ使える。セラミド3種配合の高保湿",
+          "ingredients_highlight": "ヒト型セラミド3種（AP・NP・EOP）・ヒアルロン酸",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "セザンヌ スキンコンディショナー高保湿",
+          "ceramide_type": "human_type",
+          "inci_name": "セラミドAP, セラミドNP, セラミドEOP"
+        },
+        {
+          "name": "肌ラボ 極潤ヒアルロン液",
+          "brand": "肌ラボ",
+          "price": 814,
+          "size": "170ml",
+          "type": "化粧水",
+          "key_point": "4種のヒアルロン酸配合。とろみのあるテクスチャーで高保湿",
+          "ingredients_highlight": "ヒアルロン酸×4種（異なる分子量で角層全体を保湿）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "肌ラボ 極潤 ヒアルロン液",
+          "inci_name": "ヒアルロン酸Na等"
+        },
+        {
+          "name": "無印良品 化粧水 敏感肌用 高保湿タイプ",
+          "brand": "無印良品",
+          "price": 690,
+          "size": "200ml",
+          "type": "化粧水",
+          "key_point": "岩手県釜石の天然水使用。しっとり高保湿で乾燥肌に◎",
+          "ingredients_highlight": "リピジュアR（ポリクオタニウム-51）・ヒアルロン酸",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "無印良品 化粧水 敏感肌用 高保湿",
+          "inci_name": "ヒアルロン酸Na等"
+        }
+      ],
+      "oily": [
+        {
+          "name": "ナチュリエ ハトムギ化粧水",
+          "brand": "ナチュリエ",
+          "price": 715,
+          "size": "500ml",
+          "type": "化粧水",
+          "key_point": "さっぱりテクスチャーで500ml大容量。コスパ最強の定番",
+          "ingredients_highlight": "ハトムギエキス（ヨクイニンエキス）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ナチュリエ ハトムギ化粧水",
+          "inci_name": "ハトムギ種子エキス（ヨクイニンエキス）"
+        },
+        {
+          "name": "メラノCC 薬用しみ対策 美白化粧水",
+          "brand": "ロート",
+          "price": 990,
+          "size": "170ml",
+          "type": "化粧水",
+          "key_point": "高浸透ビタミンC誘導体配合。皮脂抑制・毛穴ケアにも◎",
+          "ingredients_highlight": "3-O-エチルアスコルビン酸（高浸透ビタミンC誘導体）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "concentration_note": "ビタミンC誘導体配合のため敏感肌にはピリつく場合あり",
+          "amazon_search": "メラノCC 薬用しみ対策 美白化粧水",
+          "active_ingredient": "3-O-エチルアスコルビン酸（高浸透ビタミンC誘導体/美白）、グリチルリチン酸ジカリウム（抗炎症）",
+          "inci_name": "アスコルビン酸 / 3-O-エチルアスコルビン酸等"
+        },
+        {
+          "name": "セザンヌ スキンコンディショナー",
+          "brand": "セザンヌ",
+          "price": 715,
+          "size": "500ml",
+          "type": "化粧水",
+          "key_point": "セラミド配合でさっぱりなのにうるおう。水分バランスを整える",
+          "ingredients_highlight": "ヒト型セラミド（NP・AP・EOP）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "セザンヌ スキンコンディショナー",
+          "ceramide_type": "human_type",
+          "inci_name": "セラミドAP, セラミドNP, セラミドEOP"
+        }
+      ],
+      "combination": [
+        {
+          "name": "ナチュリエ ハトムギ化粧水",
+          "brand": "ナチュリエ",
+          "price": 715,
+          "size": "500ml",
+          "type": "化粧水",
+          "key_point": "軽いテクスチャーで部位別の重ねづけがしやすい",
+          "ingredients_highlight": "ハトムギエキス（ヨクイニンエキス）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ナチュリエ ハトムギ化粧水",
+          "inci_name": "ハトムギ種子エキス（ヨクイニンエキス）"
+        },
+        {
+          "name": "無印良品 化粧水 敏感肌用 さっぱりタイプ",
+          "brand": "無印良品",
+          "price": 580,
+          "size": "200ml",
+          "type": "化粧水",
+          "key_point": "さっぱりだけどうるおう。Tゾーンにもべたつかない",
+          "ingredients_highlight": "天然うるおい成分・グレープフルーツ種子エキス",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "無印良品 化粧水 敏感肌用 さっぱり",
+          "inci_name": ""
+        },
+        {
+          "name": "肌ラボ 白潤プレミアム 薬用浸透美白化粧水",
+          "brand": "肌ラボ",
+          "price": 990,
+          "size": "170ml",
+          "type": "化粧水",
+          "key_point": "トラネキサム酸配合で美白ケアもしつつ適度に保湿",
+          "ingredients_highlight": "トラネキサム酸（抗炎症・美白有効成分）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "肌ラボ 白潤プレミアム 美白化粧水",
+          "active_ingredient": "トラネキサム酸（美白/抗炎症）、グリチルリチン酸2K（抗炎症）",
+          "inci_name": "トラネキサム酸"
+        }
+      ],
+      "sensitive": [
+        {
+          "name": "無印良品 化粧水 敏感肌用 高保湿タイプ",
+          "brand": "無印良品",
+          "price": 690,
+          "size": "200ml",
+          "type": "化粧水",
+          "key_point": "無香料・無着色・無鉱物油・弱酸性・パラベンフリー・アルコールフリー",
+          "ingredients_highlight": "リピジュアR（ポリクオタニウム-51）・ヒアルロン酸",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "無印良品 化粧水 敏感肌用 高保湿",
+          "inci_name": "ヒアルロン酸Na等"
+        },
+        {
+          "name": "キュレル 化粧水 III とてもしっとり",
+          "brand": "キュレル",
+          "price": 1980,
+          "size": "150ml",
+          "type": "化粧水",
+          "key_point": "セラミドケアで荒れがちな肌のバリア機能を助ける。消炎剤配合",
+          "ingredients_highlight": "疑似セラミド（花王独自セラミド機能成分）・ユーカリエキス・アラントイン（消炎剤）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "キュレル 化粧水 III とてもしっとり",
+          "ceramide_type": "pseudo",
+          "inci_name": "ヘキサデシロキシPGヒドロキシエチルヘキサデカナミド（疑似セラミド）",
+          "active_ingredient": "アラントイン（細胞修復促進）"
+        },
+        {
+          "name": "ミノン アミノモイスト モイストチャージローションII",
+          "brand": "ミノン",
+          "price": 1540,
+          "size": "150ml",
+          "type": "化粧水",
+          "key_point": "9種のアミノ酸配合。バリア機能をサポート",
+          "ingredients_highlight": "9種の保潤アミノ酸・2種の清透アミノ酸",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ミノン アミノモイスト モイストチャージローション",
+          "active_ingredient": "ε-アミノカプロン酸（抗炎症）",
+          "inci_name": "ココイルグルタミン酸等（アミノ酸系界面活性剤）"
+        }
+      ],
+      "normal": [
+        {
+          "name": "ナチュリエ ハトムギ化粧水",
+          "brand": "ナチュリエ",
+          "price": 715,
+          "size": "500ml",
+          "type": "化粧水",
+          "key_point": "万人に合うさっぱり保湿。コスパ◎",
+          "ingredients_highlight": "ハトムギエキス",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ナチュリエ ハトムギ化粧水",
+          "inci_name": "ハトムギ種子エキス（ヨクイニンエキス）"
+        },
+        {
+          "name": "無印良品 化粧水 敏感肌用 しっとりタイプ",
+          "brand": "無印良品",
+          "price": 580,
+          "size": "200ml",
+          "type": "化粧水",
+          "key_point": "程よいしっとり感でオールシーズン使える",
+          "ingredients_highlight": "リピジュアR・ヒアルロン酸",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "無印良品 化粧水 敏感肌用 しっとり",
+          "inci_name": "ヒアルロン酸Na等"
+        }
+      ]
+    },
+    "serum": {
+      "_by_concern": true,
+      "_note": "美容液は肌悩み別で提案。肌タイプがsensitiveの場合はsensitivity_safe=trueの商品のみ表示すること",
+      "dryness": [
+        {
+          "name": "肌ラボ 極潤プレミアム ヒアルロン美容液",
+          "brand": "肌ラボ",
+          "price": 1100,
+          "size": "170ml",
+          "type": "美容液",
+          "key_point": "7種のヒアルロン酸配合。乾燥のインナーケアに最適",
+          "ingredients_highlight": "ヒアルロン酸×7種（分子量違いで角層全体をカバー）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "肌ラボ 極潤プレミアム ヒアルロン美容液",
+          "inci_name": "ヒアルロン酸Na等"
+        },
+        {
+          "name": "チューンメーカーズ セラミド200",
+          "brand": "チューンメーカーズ",
+          "price": 1320,
+          "size": "20ml",
+          "type": "原液美容液",
+          "key_point": "ナノセラミド配合でバリア機能をサポート。原液なので濃度が高い",
+          "ingredients_highlight": "ヒト型ナノセラミド（バリア機能補強）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "チューンメーカーズ セラミド200",
+          "ceramide_type": "human_type",
+          "inci_name": "セラミドNP（ナノ化ヒト型セラミド）"
+        }
+      ],
+      "pores": [
+        {
+          "name": "The Ordinary ナイアシンアミド10%+亜鉛1%",
+          "brand": "The Ordinary",
+          "price": 1190,
+          "size": "30ml",
+          "type": "美容液",
+          "key_point": "毛穴・テカリ・肌荒れに。AMPK活性化で皮脂分泌を抑制",
+          "ingredients_highlight": "ナイアシンアミド10%・亜鉛PCA 1%",
+          "concentration_note": "高濃度（10%）のため、敏感肌の方はピリつき・赤みが出る場合があります。初めて使う場合はパッチテスト推奨。2-5%が安全性と効果のバランスが良いとされます",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "The Ordinary ナイアシンアミド",
+          "origin": "カナダ",
+          "regulatory_note": "日本正規輸入品として販売。成分濃度は海外基準に基づく",
+          "inci_name": "ナイアシンアミド（ニコチン酸アミド）"
+        },
+        {
+          "name": "メラノCC 薬用しみ集中対策 プレミアム美容液",
+          "brand": "ロート",
+          "price": 1380,
+          "size": "20ml",
+          "type": "美容液",
+          "key_point": "高浸透ビタミンCが毛穴を引き締めキメを整える。皮脂酸化も抑制",
+          "ingredients_highlight": "活性型ビタミンC（アスコルビン酸）・ビタミンE誘導体",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "concentration_note": "活性型（ピュア）ビタミンCのため刺激を感じる場合あり",
+          "amazon_search": "メラノCC プレミアム美容液",
+          "active_ingredient": "アスコルビン酸（活性型ビタミンC/美白）、イソプロピルメチルフェノール（殺菌）、グリチルリチン酸ジカリウム（抗炎症）",
+          "inci_name": "アスコルビン酸 / 3-O-エチルアスコルビン酸等"
+        },
+        {
+          "name": "COSRX BHAブラックヘッドパワーリキッド",
+          "brand": "COSRX",
+          "price": 1500,
+          "size": "100ml",
+          "type": "エクスフォリエーター",
+          "key_point": "天然BHA（サリチル酸）が角栓・黒ずみをケア。脂溶性で毛穴内部に浸透",
+          "ingredients_highlight": "ベタインサリチル酸4%（天然BHA）",
+          "concentration_note": "BHA（サリチル酸誘導体）のため敏感肌・乾燥肌には刺激になる場合あり。週2-3回から開始推奨",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive",
+            "dry"
+          ],
+          "amazon_search": "COSRX BHA ブラックヘッド パワーリキッド",
+          "origin": "韓国",
+          "regulatory_note": "日本正規輸入品として販売。成分濃度は韓国基準に基づく場合あり",
+          "inci_name": "ベタインサリチル酸（Betaine Salicylate）"
+        }
+      ],
+      "acne": [
+        {
+          "name": "メラノCC 薬用しみ集中対策 プレミアム美容液",
+          "brand": "ロート",
+          "price": 1380,
+          "size": "20ml",
+          "type": "美容液",
+          "key_point": "殺菌成分（イソプロピルメチルフェノール）+抗炎症成分でニキビケア",
+          "ingredients_highlight": "活性型ビタミンC・殺菌成分・グリチルリチン酸ジカリウム（抗炎症）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "メラノCC プレミアム美容液",
+          "active_ingredient": "アスコルビン酸（活性型ビタミンC/美白）、イソプロピルメチルフェノール（殺菌）、グリチルリチン酸ジカリウム（抗炎症）",
+          "inci_name": "アスコルビン酸 / 3-O-エチルアスコルビン酸等"
+        },
+        {
+          "name": "COSRX アクネピンプルマスターパッチ",
+          "brand": "COSRX",
+          "price": 700,
+          "size": "24枚",
+          "type": "パッチ",
+          "key_point": "ニキビに貼るだけのハイドロコロイドパッチ。触り癖防止・膿吸収に",
+          "ingredients_highlight": "ハイドロコロイド（創傷被覆材）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "COSRX アクネ ピンプル マスターパッチ",
+          "origin": "韓国",
+          "regulatory_note": "日本正規輸入品として販売。成分濃度は韓国基準に基づく場合あり",
+          "inci_name": "ハイドロコロイド（Hydrocolloid）"
+        },
+        {
+          "name": "The Ordinary ナイアシンアミド10%+亜鉛1%",
+          "brand": "The Ordinary",
+          "price": 1190,
+          "size": "30ml",
+          "type": "美容液",
+          "key_point": "ナイアシンアミドが皮脂バランスを整えニキビ予防。亜鉛PCAの抗菌効果も",
+          "ingredients_highlight": "ナイアシンアミド10%・亜鉛PCA 1%",
+          "concentration_note": "高濃度（10%）のため敏感肌の方は注意。2-5%で十分な効果が得られるとする皮膚科医の見解もあり",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "The Ordinary ナイアシンアミド",
+          "origin": "カナダ",
+          "regulatory_note": "日本正規輸入品として販売。成分濃度は海外基準に基づく",
+          "inci_name": "ナイアシンアミド（ニコチン酸アミド）"
+        }
+      ],
+      "dullness": [
+        {
+          "name": "メラノCC 薬用しみ集中対策 プレミアム美容液",
+          "brand": "ロート",
+          "price": 1380,
+          "size": "20ml",
+          "type": "美容液",
+          "key_point": "活性型ビタミンCの抗酸化作用でくすみにアプローチ",
+          "ingredients_highlight": "活性型ビタミンC（アスコルビン酸）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "メラノCC プレミアム美容液",
+          "active_ingredient": "アスコルビン酸（活性型ビタミンC/美白）、イソプロピルメチルフェノール（殺菌）、グリチルリチン酸ジカリウム（抗炎症）",
+          "inci_name": "アスコルビン酸 / 3-O-エチルアスコルビン酸等"
+        },
+        {
+          "name": "numbuzin 3番セラム グルタチオン美容液",
+          "brand": "numbuzin",
+          "price": 1800,
+          "size": "50ml",
+          "type": "美容液",
+          "key_point": "グルタチオン配合でくすみケア。抗酸化×トーンアップ",
+          "ingredients_highlight": "グルタチオン（抗酸化トリペプチド）・ナイアシンアミド",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "numbuzin 3番 グルタチオン 美容液",
+          "origin": "韓国",
+          "regulatory_note": "日本正規輸入品として販売",
+          "inci_name": "ナイアシンアミド（ニコチン酸アミド）"
+        },
+        {
+          "name": "COSRX ビタミンC23セラム",
+          "brand": "COSRX",
+          "price": 1800,
+          "size": "20ml",
+          "type": "美容液",
+          "key_point": "高濃度ビタミンC23%で透明感アップ",
+          "ingredients_highlight": "アスコルビン酸23%",
+          "concentration_note": "高濃度（23%）のため初心者・敏感肌は避ける。ピリつき・赤みが出やすい。低濃度から慣らすのが安全",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive",
+            "dry"
+          ],
+          "amazon_search": "COSRX ビタミンC23 セラム",
+          "origin": "韓国",
+          "regulatory_note": "日本正規輸入品として販売。成分濃度は韓国基準に基づく場合あり",
+          "inci_name": "アスコルビン酸 / 3-O-エチルアスコルビン酸等"
+        }
+      ],
+      "spots": [
+        {
+          "name": "メラノCC 薬用しみ集中対策 プレミアム美容液",
+          "brand": "ロート",
+          "price": 1380,
+          "size": "20ml",
+          "type": "美容液",
+          "key_point": "シミの元にビタミンCが浸透。メラニン生成抑制の薬用美白",
+          "ingredients_highlight": "活性型ビタミンC・ビタミンE誘導体（抗酸化・血行促進）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "メラノCC プレミアム美容液",
+          "active_ingredient": "アスコルビン酸（活性型ビタミンC/美白）、イソプロピルメチルフェノール（殺菌）、グリチルリチン酸ジカリウム（抗炎症）",
+          "inci_name": "アスコルビン酸 / 3-O-エチルアスコルビン酸等"
+        },
+        {
+          "name": "肌ラボ 白潤プレミアム 薬用浸透美白美容液",
+          "brand": "肌ラボ",
+          "price": 1650,
+          "size": "20g",
+          "type": "美容液",
+          "key_point": "トラネキサム酸＋抗炎症成分でシミ予防。敏感肌にも使いやすい",
+          "ingredients_highlight": "トラネキサム酸（メラニン生成抑制）・グリチルリチン酸2K（抗炎症）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "肌ラボ 白潤プレミアム 薬用 美白美容液",
+          "active_ingredient": "トラネキサム酸（美白/抗炎症）、グリチルリチン酸2K（抗炎症）",
+          "inci_name": "トラネキサム酸"
+        }
+      ],
+      "aging": [
+        {
+          "name": "肌ラボ 極潤 薬用ハリ美容液",
+          "brand": "肌ラボ",
+          "price": 1480,
+          "size": "30g",
+          "type": "美容液",
+          "key_point": "ナイアシンアミド配合のシワ改善美容液。厚労省認可の有効成分",
+          "ingredients_highlight": "ナイアシンアミド（シワ改善有効成分・コラーゲン産生促進）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "肌ラボ 極潤 薬用 ハリ美容液",
+          "active_ingredient": "ナイアシンアミド（シワ改善）",
+          "inci_name": "ナイアシンアミド（ニコチン酸アミド）"
+        },
+        {
+          "name": "セザンヌ リンクルホワイト エッセンス",
+          "brand": "セザンヌ",
+          "price": 1320,
+          "size": "22g",
+          "type": "美容液",
+          "key_point": "シワ改善×美白のW有効成分。1000円台で医薬部外品",
+          "ingredients_highlight": "ナイアシンアミド（シワ改善＋美白のW効能）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "セザンヌ リンクルホワイト エッセンス",
+          "active_ingredient": "ナイアシンアミド（シワ改善＋美白）",
+          "inci_name": "ナイアシンアミド（ニコチン酸アミド）"
+        }
+      ],
+      "redness": [
+        {
+          "name": "Torriden ダイブインセラム",
+          "brand": "Torriden",
+          "price": 1800,
+          "size": "50ml",
+          "type": "美容液",
+          "key_point": "5種のヒアルロン酸+パンテノールで肌を鎮静・保湿。低刺激処方",
+          "ingredients_highlight": "低分子ヒアルロン酸5種・パンテノール（プロビタミンB5/鎮静・修復）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "Torriden ダイブインセラム",
+          "origin": "韓国",
+          "regulatory_note": "日本正規輸入品として販売",
+          "inci_name": "ヒアルロン酸Na等"
+        },
+        {
+          "name": "COSRX ピュアフィットCICAセラム",
+          "brand": "COSRX",
+          "price": 1500,
+          "size": "30ml",
+          "type": "美容液",
+          "key_point": "CICAエキス（ツボクサエキス）が荒れた肌を落ち着かせる。赤み鎮静に",
+          "ingredients_highlight": "ツボクサエキス（マデカッソシド・アシアチコシド/抗炎症・創傷治癒促進）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "COSRX ピュアフィット CICA セラム",
+          "origin": "韓国",
+          "regulatory_note": "日本正規輸入品として販売。成分濃度は韓国基準に基づく場合あり",
+          "inci_name": "ツボクサエキス（Centella Asiatica Extract）"
+        }
+      ],
+      "oiliness": [
+        {
+          "name": "The Ordinary ナイアシンアミド10%+亜鉛1%",
+          "brand": "The Ordinary",
+          "price": 1190,
+          "size": "30ml",
+          "type": "美容液",
+          "key_point": "皮脂分泌をコントロール（AMPK→ACC抑制経路）しテカリを抑える",
+          "ingredients_highlight": "ナイアシンアミド10%・亜鉛PCA 1%（皮脂抑制・抗菌）",
+          "concentration_note": "高濃度（10%）のため敏感肌は注意。肌が慣れていない場合は週数回から",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "The Ordinary ナイアシンアミド",
+          "origin": "カナダ",
+          "regulatory_note": "日本正規輸入品として販売。成分濃度は海外基準に基づく",
+          "inci_name": "ナイアシンアミド（ニコチン酸アミド）"
+        },
+        {
+          "name": "メラノCC 薬用しみ集中対策 プレミアム美容液",
+          "brand": "ロート",
+          "price": 1380,
+          "size": "20ml",
+          "type": "美容液",
+          "key_point": "ビタミンCが皮脂酸化を防ぎ、毛穴・テカリをケア",
+          "ingredients_highlight": "活性型ビタミンC（抗酸化・皮脂酸化抑制）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "メラノCC プレミアム美容液",
+          "active_ingredient": "アスコルビン酸（活性型ビタミンC/美白）、イソプロピルメチルフェノール（殺菌）、グリチルリチン酸ジカリウム（抗炎症）",
+          "inci_name": "アスコルビン酸 / 3-O-エチルアスコルビン酸等"
+        }
+      ],
+      "sensitive_alternatives": {
+        "_note": "肌タイプがsensitiveの場合、上記各悩みのsensitivity_safe=falseの商品を以下で代替する",
+        "pores_safe": [
+          {
+            "name": "numbuzin 3番セラム グルタチオン美容液",
+            "brand": "numbuzin",
+            "price": 1800,
+            "size": "50ml",
+            "type": "美容液",
+            "key_point": "低刺激ながらナイアシンアミド（低濃度）で毛穴ケア。敏感肌でも使いやすい",
+            "ingredients_highlight": "グルタチオン・ナイアシンアミド（低濃度）",
+            "evidence_level": "一般化粧品",
+            "sensitivity_safe": true,
+            "exclude_skin_types": [],
+            "amazon_search": "numbuzin 3番 グルタチオン 美容液",
+            "origin": "韓国",
+            "regulatory_note": "日本正規輸入品として販売",
+            "inci_name": "ナイアシンアミド（ニコチン酸アミド）"
+          },
+          {
+            "name": "肌ラボ 極潤 薬用ハリ美容液",
+            "brand": "肌ラボ",
+            "price": 1480,
+            "size": "30g",
+            "type": "美容液",
+            "key_point": "ナイアシンアミド配合だが穏やかな濃度で毛穴ケアとハリケアを両立",
+            "ingredients_highlight": "ナイアシンアミド（適正濃度）",
+            "evidence_level": "医薬部外品",
+            "sensitivity_safe": true,
+            "exclude_skin_types": [],
+            "amazon_search": "肌ラボ 極潤 薬用 ハリ美容液",
+            "active_ingredient": "ナイアシンアミド（シワ改善）",
+            "inci_name": "ナイアシンアミド（ニコチン酸アミド）"
+          }
+        ],
+        "acne_safe": [
+          {
+            "name": "COSRX アクネピンプルマスターパッチ",
+            "brand": "COSRX",
+            "price": 700,
+            "size": "24枚",
+            "type": "パッチ",
+            "key_point": "肌に直接塗布しないパッチタイプなので敏感肌でも安心",
+            "ingredients_highlight": "ハイドロコロイド",
+            "evidence_level": "一般化粧品",
+            "sensitivity_safe": true,
+            "exclude_skin_types": [],
+            "amazon_search": "COSRX アクネ ピンプル マスターパッチ",
+            "origin": "韓国",
+            "regulatory_note": "日本正規輸入品として販売。成分濃度は韓国基準に基づく場合あり",
+            "inci_name": "ハイドロコロイド（Hydrocolloid）"
+          },
+          {
+            "name": "肌ラボ 白潤プレミアム 薬用浸透美白美容液",
+            "brand": "肌ラボ",
+            "price": 1650,
+            "size": "20g",
+            "type": "美容液",
+            "key_point": "トラネキサム酸の抗炎症作用でニキビ跡の色素沈着を予防。低刺激",
+            "ingredients_highlight": "トラネキサム酸・グリチルリチン酸2K",
+            "evidence_level": "医薬部外品",
+            "sensitivity_safe": true,
+            "exclude_skin_types": [],
+            "amazon_search": "肌ラボ 白潤プレミアム 薬用 美白美容液",
+            "active_ingredient": "トラネキサム酸（美白/抗炎症）、グリチルリチン酸2K（抗炎症）",
+            "inci_name": "トラネキサム酸"
+          }
+        ],
+        "dullness_safe": [
+          {
+            "name": "numbuzin 3番セラム グルタチオン美容液",
+            "brand": "numbuzin",
+            "price": 1800,
+            "size": "50ml",
+            "type": "美容液",
+            "key_point": "グルタチオンの抗酸化作用でくすみケア。ビタミンC不耐の方の代替に",
+            "ingredients_highlight": "グルタチオン・ナイアシンアミド",
+            "evidence_level": "一般化粧品",
+            "sensitivity_safe": true,
+            "exclude_skin_types": [],
+            "amazon_search": "numbuzin 3番 グルタチオン 美容液",
+            "origin": "韓国",
+            "regulatory_note": "日本正規輸入品として販売",
+            "inci_name": "ナイアシンアミド（ニコチン酸アミド）"
+          }
+        ],
+        "spots_safe": [
+          {
+            "name": "肌ラボ 白潤プレミアム 薬用浸透美白美容液",
+            "brand": "肌ラボ",
+            "price": 1650,
+            "size": "20g",
+            "type": "美容液",
+            "key_point": "トラネキサム酸による美白は刺激が少なく敏感肌向き",
+            "ingredients_highlight": "トラネキサム酸",
+            "evidence_level": "医薬部外品",
+            "sensitivity_safe": true,
+            "exclude_skin_types": [],
+            "amazon_search": "肌ラボ 白潤プレミアム 薬用 美白美容液",
+            "active_ingredient": "トラネキサム酸（美白/抗炎症）、グリチルリチン酸2K（抗炎症）",
+            "inci_name": "トラネキサム酸"
+          }
+        ],
+        "oiliness_safe": [
+          {
+            "name": "肌ラボ 極潤 薬用ハリ美容液",
+            "brand": "肌ラボ",
+            "price": 1480,
+            "size": "30g",
+            "type": "美容液",
+            "key_point": "穏やかなナイアシンアミド濃度で皮脂コントロール。敏感肌にも◎",
+            "ingredients_highlight": "ナイアシンアミド",
+            "evidence_level": "医薬部外品",
+            "sensitivity_safe": true,
+            "exclude_skin_types": [],
+            "amazon_search": "肌ラボ 極潤 薬用 ハリ美容液",
+            "active_ingredient": "ナイアシンアミド（シワ改善）",
+            "inci_name": "ナイアシンアミド（ニコチン酸アミド）"
+          }
+        ]
+      }
+    },
+    "moisturizer": {
+      "dry": [
+        {
+          "name": "キュレル 潤浸保湿フェイスクリーム",
+          "brand": "キュレル",
+          "price": 2530,
+          "size": "40g",
+          "type": "クリーム",
+          "key_point": "セラミド機能成分配合。こっくりクリームで乾燥を防ぐ。消炎剤入り",
+          "ingredients_highlight": "疑似セラミド（花王独自セラミド機能成分）・アラントイン（消炎剤）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "キュレル 潤浸保湿 フェイスクリーム",
+          "ceramide_type": "pseudo",
+          "inci_name": "ヘキサデシロキシPGヒドロキシエチルヘキサデカナミド（疑似セラミド）",
+          "active_ingredient": "アラントイン（細胞修復促進）"
+        },
+        {
+          "name": "ニベア クリーム 大缶",
+          "brand": "ニベア",
+          "price": 600,
+          "size": "169g",
+          "type": "クリーム",
+          "key_point": "ミネラルオイルのオクルーシブ効果（閉塞性保湿）で水分蒸発を強力にブロック",
+          "ingredients_highlight": "ミネラルオイル・ワセリン（オクルーシブ効果/水分蒸散防止）・スクワラン",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [
+            "oily"
+          ],
+          "amazon_search": "ニベア クリーム 大缶",
+          "inci_name": ""
+        },
+        {
+          "name": "セタフィル モイスチャライジングクリーム",
+          "brand": "セタフィル",
+          "price": 1580,
+          "size": "566g",
+          "type": "クリーム",
+          "key_point": "皮膚科学生まれ。大容量で顔にも体にも使える",
+          "ingredients_highlight": "グリセリン・ワセリン・マカデミアナッツ油",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "セタフィル モイスチャライジングクリーム",
+          "origin": "フランス（ガルデルマ社）",
+          "regulatory_note": "日本正規輸入品として販売",
+          "inci_name": ""
+        }
+      ],
+      "oily": [
+        {
+          "name": "無印良品 乳液 敏感肌用 さっぱりタイプ",
+          "brand": "無印良品",
+          "price": 580,
+          "size": "200ml",
+          "type": "乳液",
+          "key_point": "軽いテクスチャーでベタつかない。脂性肌でも使いやすい",
+          "ingredients_highlight": "天然うるおい成分・グレープフルーツ種子エキス",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "無印良品 乳液 敏感肌用 さっぱり",
+          "inci_name": ""
+        },
+        {
+          "name": "ナチュリエ ハトムギ保湿ジェル",
+          "brand": "ナチュリエ",
+          "price": 990,
+          "size": "180g",
+          "type": "ジェル",
+          "key_point": "オイルフリーのジェルタイプ。軽いのにしっかり保湿",
+          "ingredients_highlight": "ハトムギエキス（オイルフリー処方）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ナチュリエ ハトムギ保湿ジェル",
+          "inci_name": "ハトムギ種子エキス（ヨクイニンエキス）"
+        },
+        {
+          "name": "COSRX オイルフリーモイスチャーライト",
+          "brand": "COSRX",
+          "price": 1500,
+          "size": "100ml",
+          "type": "ジェルクリーム",
+          "key_point": "白樺樹液ベースのオイルフリー保湿。テカらず潤う",
+          "ingredients_highlight": "白樺樹液70%・ヒアルロン酸（オイルフリー）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "COSRX オイルフリー モイスチャー",
+          "origin": "韓国",
+          "regulatory_note": "日本正規輸入品として販売。成分濃度は韓国基準に基づく場合あり",
+          "inci_name": "ヒアルロン酸Na等"
+        }
+      ],
+      "combination": [
+        {
+          "name": "ナチュリエ ハトムギ保湿ジェル",
+          "brand": "ナチュリエ",
+          "price": 990,
+          "size": "180g",
+          "type": "ジェル",
+          "key_point": "Tゾーンはこれだけ、Uゾーンはクリーム重ねが◎。ゾーンケアの基本に最適",
+          "ingredients_highlight": "ハトムギエキス（オイルフリー）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ナチュリエ ハトムギ保湿ジェル",
+          "inci_name": "ハトムギ種子エキス（ヨクイニンエキス）"
+        },
+        {
+          "name": "無印良品 乳液 敏感肌用 しっとりタイプ",
+          "brand": "無印良品",
+          "price": 580,
+          "size": "200ml",
+          "type": "乳液",
+          "key_point": "ほどよいしっとり感で混合肌に使いやすい",
+          "ingredients_highlight": "天然うるおい成分・リピジュアR",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "無印良品 乳液 敏感肌用 しっとり",
+          "inci_name": ""
+        },
+        {
+          "name": "キュレル 潤浸保湿 乳液",
+          "brand": "キュレル",
+          "price": 1980,
+          "size": "120ml",
+          "type": "乳液",
+          "key_point": "セラミドケアでバリア機能サポート。乾燥部分も安心",
+          "ingredients_highlight": "疑似セラミド（花王独自セラミド機能成分）・ユーカリエキス",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "キュレル 潤浸保湿 乳液",
+          "ceramide_type": "pseudo",
+          "inci_name": "ヘキサデシロキシPGヒドロキシエチルヘキサデカナミド（疑似セラミド）",
+          "active_ingredient": "アラントイン（細胞修復促進）"
+        }
+      ],
+      "sensitive": [
+        {
+          "name": "キュレル 潤浸保湿フェイスクリーム",
+          "brand": "キュレル",
+          "price": 2530,
+          "size": "40g",
+          "type": "クリーム",
+          "key_point": "弱酸性・無香料。荒れた肌のバリア機能を助ける。消炎剤配合",
+          "ingredients_highlight": "疑似セラミド（花王独自セラミド機能成分）・アラントイン（消炎剤）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "キュレル 潤浸保湿 フェイスクリーム",
+          "ceramide_type": "pseudo",
+          "inci_name": "ヘキサデシロキシPGヒドロキシエチルヘキサデカナミド（疑似セラミド）",
+          "active_ingredient": "アラントイン（細胞修復促進）"
+        },
+        {
+          "name": "ミノン アミノモイスト モイストチャージミルク",
+          "brand": "ミノン",
+          "price": 1540,
+          "size": "100g",
+          "type": "乳液",
+          "key_point": "9種のアミノ酸でバリア機能を守りながら保湿",
+          "ingredients_highlight": "9種の保潤アミノ酸・スクワラン",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ミノン アミノモイスト モイストチャージミルク",
+          "active_ingredient": "ε-アミノカプロン酸（抗炎症）",
+          "inci_name": "ココイルグルタミン酸等（アミノ酸系界面活性剤）"
+        },
+        {
+          "name": "セタフィル モイスチャライジングクリーム",
+          "brand": "セタフィル",
+          "price": 1580,
+          "size": "566g",
+          "type": "クリーム",
+          "key_point": "敏感肌にも使える低刺激処方。皮膚科推奨",
+          "ingredients_highlight": "グリセリン・マカデミアナッツ油",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "セタフィル モイスチャライジングクリーム",
+          "origin": "フランス（ガルデルマ社）",
+          "regulatory_note": "日本正規輸入品として販売",
+          "inci_name": ""
+        }
+      ],
+      "normal": [
+        {
+          "name": "無印良品 乳液 敏感肌用 しっとりタイプ",
+          "brand": "無印良品",
+          "price": 580,
+          "size": "200ml",
+          "type": "乳液",
+          "key_point": "普通肌に丁度いいしっとり感。オールシーズン",
+          "ingredients_highlight": "天然うるおい成分・リピジュアR",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "無印良品 乳液 敏感肌用 しっとり",
+          "inci_name": ""
+        },
+        {
+          "name": "ナチュリエ ハトムギ保湿ジェル",
+          "brand": "ナチュリエ",
+          "price": 990,
+          "size": "180g",
+          "type": "ジェル",
+          "key_point": "軽い使用感で普通肌のベースケアに最適",
+          "ingredients_highlight": "ハトムギエキス",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "ナチュリエ ハトムギ保湿ジェル",
+          "inci_name": "ハトムギ種子エキス（ヨクイニンエキス）"
+        }
+      ]
+    },
+    "sunscreen": {
+      "dry": [
+        {
+          "name": "スキンアクア スーパーモイスチャーエッセンス",
+          "brand": "ロート",
+          "price": 810,
+          "size": "80g",
+          "type": "エッセンス",
+          "spf": "SPF50+ PA++++",
+          "uv_filter_type": "chemical",
+          "uv_filter_note": "紫外線吸収剤使用（ケミカル）",
+          "key_point": "4種のうるおい成分配合。みずみずしく保湿しながらUVカット",
+          "ingredients_highlight": "ヒアルロン酸・コラーゲン・アミノ酸・スクワラン",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "スキンアクア スーパーモイスチャー エッセンス",
+          "inci_name": "ヒアルロン酸Na等"
+        },
+        {
+          "name": "ニベアUV ディーププロテクト&ケア ジェル",
+          "brand": "ニベア",
+          "price": 900,
+          "size": "80g",
+          "type": "ジェル",
+          "spf": "SPF50+ PA++++",
+          "uv_filter_type": "chemical",
+          "uv_filter_note": "紫外線吸収剤使用（ケミカル）",
+          "key_point": "金のニベア。美容ケア成分配合で乾燥から守る",
+          "ingredients_highlight": "ヒアルロン酸・ビタミンE誘導体",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "ニベアUV ディーププロテクト ジェル",
+          "inci_name": "ヒアルロン酸Na等"
+        }
+      ],
+      "oily": [
+        {
+          "name": "ビオレUV アクアリッチ ウォータリーエッセンス",
+          "brand": "ビオレ",
+          "price": 810,
+          "size": "70g",
+          "type": "エッセンス",
+          "spf": "SPF50+ PA++++",
+          "uv_filter_type": "chemical",
+          "uv_filter_note": "紫外線吸収剤使用（ケミカル）",
+          "key_point": "軽い水感テクスチャー。ベタつかずサラサラ",
+          "ingredients_highlight": "ヒアルロン酸（軽い使用感設計）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "ビオレUV アクアリッチ ウォータリーエッセンス",
+          "inci_name": "ヒアルロン酸Na等"
+        },
+        {
+          "name": "スキンアクア トーンアップUVエッセンス",
+          "brand": "ロート",
+          "price": 810,
+          "size": "80g",
+          "type": "エッセンス",
+          "spf": "SPF50+ PA++++",
+          "uv_filter_type": "chemical",
+          "uv_filter_note": "紫外線吸収剤使用（ケミカル）",
+          "key_point": "ラベンダーカラーでトーンアップ。テカリも抑制",
+          "ingredients_highlight": "ヒアルロン酸・ビタミンC誘導体",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "スキンアクア トーンアップ UV エッセンス",
+          "inci_name": "ヒアルロン酸Na等"
+        }
+      ],
+      "combination": [
+        {
+          "name": "ビオレUV アクアリッチ ウォータリーエッセンス",
+          "brand": "ビオレ",
+          "price": 810,
+          "size": "70g",
+          "type": "エッセンス",
+          "spf": "SPF50+ PA++++",
+          "uv_filter_type": "chemical",
+          "uv_filter_note": "紫外線吸収剤使用（ケミカル）",
+          "key_point": "軽いのにしっかりUVカット。混合肌に最適バランス",
+          "ingredients_highlight": "ヒアルロン酸",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "ビオレUV アクアリッチ ウォータリーエッセンス",
+          "inci_name": "ヒアルロン酸Na等"
+        },
+        {
+          "name": "スキンアクア スーパーモイスチャーエッセンス",
+          "brand": "ロート",
+          "price": 810,
+          "size": "80g",
+          "type": "エッセンス",
+          "spf": "SPF50+ PA++++",
+          "uv_filter_type": "chemical",
+          "uv_filter_note": "紫外線吸収剤使用（ケミカル）",
+          "key_point": "保湿力があるのにべたつかない",
+          "ingredients_highlight": "ヒアルロン酸・コラーゲン",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "スキンアクア スーパーモイスチャー エッセンス",
+          "inci_name": "ヒアルロン酸Na等"
+        }
+      ],
+      "sensitive": [
+        {
+          "name": "キュレル UVカット デイバリアUVローション",
+          "brand": "キュレル",
+          "price": 1650,
+          "size": "60ml",
+          "type": "ローション",
+          "spf": "SPF50+ PA+++",
+          "uv_filter_type": "physical",
+          "uv_filter_note": "紫外線散乱剤のみ使用（ノンケミカル）。敏感肌に優しい",
+          "key_point": "セラミドケアしながらUVカット。紫外線散乱剤のみで低刺激",
+          "ingredients_highlight": "疑似セラミド（花王独自セラミド機能成分）・酸化亜鉛・酸化チタン（散乱剤）",
+          "evidence_level": "医薬部外品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "キュレル UVカット デイバリアUVローション",
+          "ceramide_type": "pseudo",
+          "inci_name": "ヘキサデシロキシPGヒドロキシエチルヘキサデカナミド（疑似セラミド）",
+          "active_ingredient": "アラントイン（細胞修復促進）"
+        },
+        {
+          "name": "無印良品 日焼け止めミルク",
+          "brand": "無印良品",
+          "price": 790,
+          "size": "150ml",
+          "type": "ミルク",
+          "spf": "SPF30 PA++",
+          "uv_filter_type": "physical",
+          "uv_filter_note": "紫外線散乱剤のみ使用（ノンケミカル）",
+          "key_point": "低刺激処方。日常使いにちょうどいいSPF。散乱剤のみで安心",
+          "ingredients_highlight": "酸化チタン・酸化亜鉛（散乱剤）",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": true,
+          "exclude_skin_types": [],
+          "amazon_search": "無印良品 日焼け止めミルク",
+          "inci_name": ""
+        }
+      ],
+      "normal": [
+        {
+          "name": "ビオレUV アクアリッチ ウォータリーエッセンス",
+          "brand": "ビオレ",
+          "price": 810,
+          "size": "70g",
+          "type": "エッセンス",
+          "spf": "SPF50+ PA++++",
+          "uv_filter_type": "chemical",
+          "uv_filter_note": "紫外線吸収剤使用（ケミカル）",
+          "key_point": "日本で最も売れている日焼け止め。万人向け",
+          "ingredients_highlight": "ヒアルロン酸",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "ビオレUV アクアリッチ ウォータリーエッセンス",
+          "inci_name": "ヒアルロン酸Na等"
+        },
+        {
+          "name": "スキンアクア スーパーモイスチャーエッセンス",
+          "brand": "ロート",
+          "price": 810,
+          "size": "80g",
+          "type": "エッセンス",
+          "spf": "SPF50+ PA++++",
+          "uv_filter_type": "chemical",
+          "uv_filter_note": "紫外線吸収剤使用（ケミカル）",
+          "key_point": "みずみずしい使用感でストレスフリー",
+          "ingredients_highlight": "ヒアルロン酸・コラーゲン",
+          "evidence_level": "一般化粧品",
+          "sensitivity_safe": false,
+          "exclude_skin_types": [
+            "sensitive"
+          ],
+          "amazon_search": "スキンアクア スーパーモイスチャー エッセンス",
+          "inci_name": "ヒアルロン酸Na等"
+        }
+      ]
+    }
+  },
+  "recommendation_logic": {
+    "_note": "アプリ実装時のフィルタリングロジック",
+    "step1": "肌タイプ別にクレンジング〜乳液・日焼け止めを選定",
+    "step2": "肌悩み別に美容液を選定",
+    "step3_safety_filter": "肌タイプがsensitiveの場合、全カテゴリでsensitivity_safe=falseの商品を除外し、sensitive_alternativesから代替品を提案",
+    "step4_exclude_filter": "各商品のexclude_skin_typesに該当する肌タイプの場合は除外",
+    "step5_budget_filter": "予算フィルターのmax_per_itemを超える商品を除外",
+    "step6_concentration_warning": "concentration_noteが存在する商品は、レコメンド画面に注意書きを表示"
+  },
+  "budget_filters": {
+    "under_1000": {
+      "label": "〜1,000円/月",
+      "max_per_item": 800,
+      "description": "最小限の3ステップ（洗顔・化粧水・乳液）に絞る"
+    },
+    "under_3000": {
+      "label": "〜3,000円/月",
+      "max_per_item": 1500,
+      "description": "基本の5ステップをカバーできる予算帯"
+    },
+    "under_5000": {
+      "label": "〜5,000円/月",
+      "max_per_item": 2500,
+      "description": "美容液やスペシャルケアも追加できる"
+    },
+    "no_limit": {
+      "label": "予算気にしない",
+      "max_per_item": 99999,
+      "description": "プチプラの中で最も効果的な組み合わせを提案"
+    }
+  },
+  "minimal_routine": {
+    "description": "予算が限られている場合の最小限3ステップ",
+    "steps": [
+      "face_wash",
+      "toner",
+      "moisturizer"
+    ],
+    "note": "この3つだけでもスキンケアの基本は押さえられます。余裕ができたら美容液と日焼け止めを追加しましょう。日焼け止めは紫外線ダメージ防止のためできるだけ早く取り入れることを推奨します。"
+  },
+  "seasonal_tips": {
+    "spring": {
+      "name": "春（3-5月）",
+      "concerns": [
+        "花粉による肌荒れ",
+        "紫外線量の増加",
+        "寒暖差によるゆらぎ"
+      ],
+      "tip": "花粉シーズンはバリア機能を意識したケアを。日焼け止めも本格的に開始しましょう。",
+      "ingredient_boost": "セラミド・CICA（バリア強化）"
+    },
+    "summer": {
+      "name": "夏（6-8月）",
+      "concerns": [
+        "皮脂・テカリ増加",
+        "紫外線ダメージ",
+        "エアコンによる乾燥"
+      ],
+      "tip": "さっぱりテクスチャーに切り替えつつ、保湿はサボらない。日焼け止めの塗り直しを。",
+      "ingredient_boost": "ビタミンC（抗酸化）・ナイアシンアミド（皮脂抑制）"
+    },
+    "autumn": {
+      "name": "秋（9-11月）",
+      "concerns": [
+        "夏のダメージ回復",
+        "乾燥の始まり",
+        "ターンオーバーの乱れ"
+      ],
+      "tip": "夏に受けた紫外線ダメージのケアを。保湿を徐々にリッチにシフト。",
+      "ingredient_boost": "トラネキサム酸（色素沈着ケア）・ヒアルロン酸（保湿強化）"
+    },
+    "winter": {
+      "name": "冬（12-2月）",
+      "concerns": [
+        "乾燥の深刻化",
+        "バリア機能の低下",
+        "血行不良によるくすみ"
+      ],
+      "tip": "クリームでしっかり蓋をする保湿重視のケアへ。化粧水の重ねづけも効果的。",
+      "ingredient_boost": "セラミド（バリア補修）・スクワラン（エモリエント効果）"
+    }
+  },
+  "pharmacological_claims_guide": {
+    "_note": "薬機法に基づく表現ガイド。アプリUI表示時に遵守すること",
+    "一般化粧品": {
+      "allowed": [
+        "肌を整える",
+        "肌にうるおいを与える",
+        "キメを整える",
+        "肌をなめらかにする",
+        "肌を清浄にする",
+        "肌にツヤを与える",
+        "肌にハリを与える",
+        "肌をすこやかに保つ",
+        "肌を引き締める"
+      ],
+      "prohibited": [
+        "シワ改善",
+        "美白",
+        "ニキビを治す",
+        "シミが消える",
+        "アンチエイジング",
+        "若返り"
+      ]
+    },
+    "医薬部外品": {
+      "allowed_additional": [
+        "メラニンの生成を抑え、しみ・そばかすを防ぐ（美白）",
+        "シワを改善する（ナイアシンアミド等認可成分）",
+        "肌あれを防ぐ",
+        "日やけによるしみ・そばかすを防ぐ"
+      ],
+      "note": "承認された効能効果の範囲内でのみ表現可能"
+    }
+  }
+}

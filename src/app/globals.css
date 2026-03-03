@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFFAF8;
+  --foreground: #333333;
+  --primary: #E8907E;
+  --primary-light: #FFF0ED;
+  --secondary: #7EAEE8;
+  --text-sub: #666666;
+  --bg-card: #FFFFFF;
+  --border: #E5E5E5;
+  --success: #4CAF50;
+  --warning: #FF9800;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-secondary: var(--secondary);
+  --color-text-sub: var(--text-sub);
+  --color-bg-card: var(--bg-card);
+  --color-border: var(--border);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --font-sans: var(--font-noto-sans-jp);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-noto-sans-jp), "Noto Sans JP", sans-serif;
+}

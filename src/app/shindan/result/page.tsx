@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import type { SkinType, ConcernId, BudgetId } from "@/types/diagnosis";
@@ -51,6 +51,14 @@ function isValidConcern(v: string): v is ConcernId {
 function isValidBudget(v: string): v is BudgetId {
   return (VALID_BUDGETS as string[]).includes(v);
 }
+
+const SKIN_TYPE_NAMES: Record<SkinType, string> = {
+  dry: "乾燥肌",
+  oily: "脂性肌",
+  combination: "混合肌",
+  sensitive: "敏感肌",
+  normal: "普通肌",
+};
 
 // ---------------------------------------------------------------------------
 // Season display names
@@ -204,19 +212,64 @@ function ResultContent() {
     );
   }, [validationResult]);
 
+  // Set dynamic OGP meta tags for client-side rendering
+  useEffect(() => {
+    if (!validationResult) return;
+
+    const skinTypeName = SKIN_TYPE_NAMES[validationResult.skinType];
+    const title = `${skinTypeName}の診断結果｜肌ナビ`;
+    const description = `私の肌タイプは${skinTypeName}！肌ナビで最適なスキンケアルーティンを見つけよう。`;
+    const ogImageUrl = `https://hadanavi.vercel.app/api/og?type=${validationResult.skinType}`;
+
+    document.title = title;
+
+    const setMeta = (property: string, content: string) => {
+      let el = document.querySelector(`meta[property="${property}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute("property", property);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
+
+    const setMetaName = (name: string, content: string) => {
+      let el = document.querySelector(`meta[name="${name}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute("name", name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
+
+    setMeta("og:title", title);
+    setMeta("og:description", description);
+    setMeta("og:image", ogImageUrl);
+    setMeta("og:image:width", "1200");
+    setMeta("og:image:height", "630");
+    setMeta("og:type", "website");
+    setMeta("og:url", window.location.href);
+    setMeta("og:site_name", "肌ナビ");
+    setMetaName("twitter:card", "summary_large_image");
+    setMetaName("twitter:title", title);
+    setMetaName("twitter:description", description);
+    setMetaName("twitter:image", ogImageUrl);
+  }, [validationResult]);
+
   // Missing or invalid params
   if (!validationResult || !recommendation) {
     return <MissingParamsError />;
   }
 
-  const { skinType, budget } = validationResult;
+  const { skinType, concerns, budget } = validationResult;
   const isLowBudget = budget === "under_1000";
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
       <div className="space-y-8">
         {/* Skin type hero card */}
-        <SkinTypeResult skinType={skinType} />
+        <SkinTypeResult skinType={skinType} concerns={concerns} budget={budget} />
 
         {/* Seasonal advice */}
         <SeasonalAdviceCard advice={recommendation.seasonal_advice} />

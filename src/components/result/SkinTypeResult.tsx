@@ -2,6 +2,7 @@
 
 import type { SkinType, SkinTypeInfo } from "@/types/diagnosis";
 import Card from "@/components/common/Card";
+import ShareButton from "@/components/result/ShareButton";
 import skinTypesData from "@/data/skin-types.json";
 
 const SKIN_TYPE_COLORS: Record<SkinType, { bg: string; border: string; badge: string }> = {
@@ -34,9 +35,11 @@ const SKIN_TYPE_COLORS: Record<SkinType, { bg: string; border: string; badge: st
 
 interface SkinTypeResultProps {
   skinType: SkinType;
+  concerns?: string[];
+  budget?: string;
 }
 
-export default function SkinTypeResult({ skinType }: SkinTypeResultProps) {
+export default function SkinTypeResult({ skinType, concerns = [], budget = "" }: SkinTypeResultProps) {
   const skinTypeInfo = (skinTypesData as SkinTypeInfo[]).find(
     (s) => s.id === skinType
   );
@@ -96,12 +99,8 @@ export default function SkinTypeResult({ skinType }: SkinTypeResultProps) {
         </ul>
       </div>
 
-      {/* Share button placeholder - Issue #9 */}
-      <div className="rounded-lg border border-dashed border-border p-3">
-        <p className="text-xs text-text-sub">
-          共有ボタンは今後実装予定です
-        </p>
-      </div>
+      {/* Share buttons */}
+      <ShareButton skinType={skinType} concerns={concerns} budget={budget} />
     </Card>
   );
 }

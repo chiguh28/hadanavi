@@ -6,6 +6,7 @@ import Link from "next/link";
 import type { SkinType, ConcernId, BudgetId } from "@/types/diagnosis";
 import type { SeasonalAdvice } from "@/types/skincare";
 import { buildRecommendation } from "@/lib/recommendation/engine";
+import { trackEvent } from "@/lib/analytics/events";
 import SkinTypeResult from "@/components/result/SkinTypeResult";
 import RoutineSteps from "@/components/result/RoutineSteps";
 import Button from "@/components/common/Button";
@@ -241,7 +242,13 @@ function ResultContent() {
             {!showFullRoutine && (
               <div className="text-center">
                 <button
-                  onClick={() => setShowFullRoutine(true)}
+                  onClick={() => {
+                    setShowFullRoutine(true);
+                    trackEvent({
+                      name: "full_routine_expand",
+                      params: { skin_type: skinType, budget },
+                    });
+                  }}
                   className="inline-flex items-center rounded-full border-2 border-primary px-6 py-2 text-sm font-medium text-primary transition-all hover:bg-primary-light"
                 >
                   フルルーティンを見る
@@ -269,7 +276,15 @@ function ResultContent() {
           <>
             <div className="text-center">
               <button
-                onClick={() => setShowFullRoutine(!showFullRoutine)}
+                onClick={() => {
+                  if (!showFullRoutine) {
+                    trackEvent({
+                      name: "full_routine_expand",
+                      params: { skin_type: skinType, budget },
+                    });
+                  }
+                  setShowFullRoutine(!showFullRoutine);
+                }}
                 className="inline-flex items-center rounded-full border-2 border-primary px-6 py-2 text-sm font-medium text-primary transition-all hover:bg-primary-light"
               >
                 {showFullRoutine

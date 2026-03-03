@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { ConcernId, BudgetId, Question } from "@/types/diagnosis";
 import { calculateScores } from "@/lib/diagnosis/scoring";
 import { determineSkinType } from "@/lib/diagnosis/tieBreaking";
+import { trackEvent } from "@/lib/analytics/events";
 import questionsData from "@/data/questions.json";
 import concernsData from "@/data/concerns.json";
 import budgetsData from "@/data/budgets.json";
@@ -23,6 +24,14 @@ const budgets = budgetsData as Budget[];
 export default function ShindanPage() {
   const router = useRouter();
 
+  // GA4: Track shindan start on page load
+  useEffect(() => {
+    trackEvent({
+      name: "shindan_start",
+      params: { referrer_page: document.referrer || "direct" },
+    });
+  }, []);
+
   const [currentPhase, setCurrentPhase] = useState<Phase>("questions");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
@@ -35,6 +44,16 @@ export default function ShindanPage() {
       const newAnswers = [...answers];
       newAnswers[currentQuestion] = optionIndex;
       setAnswers(newAnswers);
+
+      // GA4: Track each question answer
+      const q = questions[currentQuestion];
+      trackEvent({
+        name: "shindan_q_answer",
+        params: {
+          question_id: q.id,
+          answer_label: q.options[optionIndex].label,
+        },
+      });
 
       if (currentQuestion < questions.length - 1) {
         // Advance to next question
@@ -96,6 +115,16 @@ export default function ShindanPage() {
     // Calculate skin type from answers
     const scores = calculateScores(answers, questions);
     const skinType = determineSkinType(scores);
+
+    // GA4: Track diagnosis completion
+    trackEvent({
+      name: "shindan_complete",
+      params: {
+        skin_type: skinType,
+        concerns: selectedConcerns.join(",") || "none",
+        budget: selectedBudget,
+      },
+    });
 
     // Build URL params
     const params = new URLSearchParams();

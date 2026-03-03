@@ -2,9 +2,14 @@
 
 import type { Product } from "@/types/product";
 import Card from "@/components/common/Card";
+import { trackEvent } from "@/lib/analytics/events";
 
 interface ProductCardProps {
   product: Product;
+  /** Routine step name for GA4 tracking (e.g. "toner") */
+  step?: string;
+  /** Position within the step for GA4 tracking (0-indexed) */
+  position?: number;
 }
 
 /**
@@ -34,11 +39,23 @@ function getAffiliateLinks(product: Product) {
   return { amazonUrl, rakutenUrl, drugstoreUrl };
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, step = "", position = 0 }: ProductCardProps) {
   const { amazonUrl, rakutenUrl, drugstoreUrl } = getAffiliateLinks(product);
 
   return (
-    <Card className="border border-border">
+    <Card
+      className="border border-border"
+      onClick={() => {
+        trackEvent({
+          name: "product_click",
+          params: {
+            product_id: product.product_id,
+            step,
+            position,
+          },
+        });
+      }}
+    >
       <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <p className="text-xs text-text-sub">{product.brand}</p>
@@ -89,6 +106,16 @@ export default function ProductCard({ product }: ProductCardProps) {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center rounded-full bg-[#FF9900] px-3 py-1.5 text-xs font-medium text-white transition-opacity hover:opacity-90"
+          onClick={() => {
+            trackEvent({
+              name: "affiliate_click",
+              params: {
+                product_id: product.product_id,
+                asp_name: "amazon",
+                price: product.price,
+              },
+            });
+          }}
         >
           Amazon
         </a>
@@ -97,6 +124,16 @@ export default function ProductCard({ product }: ProductCardProps) {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center rounded-full bg-[#BF0000] px-3 py-1.5 text-xs font-medium text-white transition-opacity hover:opacity-90"
+          onClick={() => {
+            trackEvent({
+              name: "affiliate_click",
+              params: {
+                product_id: product.product_id,
+                asp_name: "rakuten",
+                price: product.price,
+              },
+            });
+          }}
         >
           楽天
         </a>
@@ -105,6 +142,12 @@ export default function ProductCard({ product }: ProductCardProps) {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center rounded-full bg-secondary px-3 py-1.5 text-xs font-medium text-white transition-opacity hover:opacity-90"
+          onClick={() => {
+            trackEvent({
+              name: "drugstore_click",
+              params: { product_id: product.product_id },
+            });
+          }}
         >
           近くのドラッグストア
         </a>

@@ -24,6 +24,12 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     siteName: "肌ナビ",
   },
+  icons: {
+    icon: "/favicon.ico",
+  },
+  alternates: {
+    canonical: "https://hadanavi.vercel.app",
+  },
 };
 
 export default function RootLayout({

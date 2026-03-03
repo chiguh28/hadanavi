@@ -1,0 +1,108 @@
+[
+  {
+    "id": "q1",
+    "text": "洗顔後10分放置した肌の状態は？",
+    "options": [
+      {
+        "label": "全体的につっぱる",
+        "scores": { "dry": 3, "oily": 0, "combination": 0, "sensitive": 1, "normal": 0 }
+      },
+      {
+        "label": "全体的にベタつく",
+        "scores": { "dry": 0, "oily": 3, "combination": 0, "sensitive": 0, "normal": 0 }
+      },
+      {
+        "label": "Tゾーンはベタつくが頬はつっぱる",
+        "scores": { "dry": 0, "oily": 0, "combination": 3, "sensitive": 0, "normal": 0 }
+      },
+      {
+        "label": "特に変化なし",
+        "scores": { "dry": 0, "oily": 0, "combination": 0, "sensitive": 0, "normal": 3 }
+      }
+    ]
+  },
+  {
+    "id": "q2",
+    "text": "日中のメイク崩れは？",
+    "options": [
+      {
+        "label": "ファンデが割れて粉っぽくなる",
+        "scores": { "dry": 3, "oily": 0, "combination": 1, "sensitive": 1, "normal": 0 }
+      },
+      {
+        "label": "Tゾーンがドロドロに崩れる",
+        "scores": { "dry": 0, "oily": 3, "combination": 2, "sensitive": 0, "normal": 0 }
+      },
+      {
+        "label": "鼻はテカるけど頬は乾く",
+        "scores": { "dry": 0, "oily": 0, "combination": 3, "sensitive": 0, "normal": 0 }
+      },
+      {
+        "label": "あまり崩れない",
+        "scores": { "dry": 0, "oily": 0, "combination": 0, "sensitive": 0, "normal": 3 }
+      }
+    ]
+  },
+  {
+    "id": "q3",
+    "text": "新しい化粧品で刺激を感じることは？",
+    "options": [
+      {
+        "label": "よくある（赤み・ピリつき）",
+        "scores": { "dry": 0, "oily": 0, "combination": 0, "sensitive": 3, "normal": 0 }
+      },
+      {
+        "label": "たまにある",
+        "scores": { "dry": 1, "oily": 0, "combination": 0, "sensitive": 1, "normal": 0 }
+      },
+      {
+        "label": "ほとんどない",
+        "scores": { "dry": 0, "oily": 0, "combination": 0, "sensitive": 0, "normal": 1 }
+      }
+    ]
+  },
+  {
+    "id": "q4",
+    "text": "毛穴の状態で気になるのは？",
+    "options": [
+      {
+        "label": "目立たないが乾燥による小ジワが気になる",
+        "scores": { "dry": 3, "oily": 0, "combination": 0, "sensitive": 1, "normal": 0 }
+      },
+      {
+        "label": "鼻・頬の毛穴が開いて黒ずむ",
+        "scores": { "dry": 0, "oily": 3, "combination": 2, "sensitive": 0, "normal": 0 }
+      },
+      {
+        "label": "Tゾーンだけ目立つ",
+        "scores": { "dry": 0, "oily": 1, "combination": 3, "sensitive": 0, "normal": 0 }
+      },
+      {
+        "label": "特に気にならない",
+        "scores": { "dry": 0, "oily": 0, "combination": 0, "sensitive": 0, "normal": 3 }
+      }
+    ]
+  },
+  {
+    "id": "q5",
+    "text": "季節の変わり目に肌が変わる？",
+    "options": [
+      {
+        "label": "冬にカサカサ・粉ふきが出る",
+        "scores": { "dry": 2, "oily": 0, "combination": 0, "sensitive": 1, "normal": 0 }
+      },
+      {
+        "label": "夏にベタつき・ニキビが増える",
+        "scores": { "dry": 0, "oily": 2, "combination": 1, "sensitive": 0, "normal": 0 }
+      },
+      {
+        "label": "季節ごとに乾燥もテカリも変わる",
+        "scores": { "dry": 0, "oily": 0, "combination": 2, "sensitive": 1, "normal": 0 }
+      },
+      {
+        "label": "あまり変わらない",
+        "scores": { "dry": 0, "oily": 0, "combination": 0, "sensitive": 0, "normal": 2 }
+      }
+    ]
+  }
+]

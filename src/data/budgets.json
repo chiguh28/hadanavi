@@ -1,0 +1,30 @@
+[
+  {
+    "id": "under_1000",
+    "label": "〜1,000円/月",
+    "max_price": 800,
+    "description": "まずは基本の3つから",
+    "routine_type": "minimal"
+  },
+  {
+    "id": "under_3000",
+    "label": "〜3,000円/月",
+    "max_price": 1500,
+    "description": "しっかりケア",
+    "routine_type": "standard"
+  },
+  {
+    "id": "under_5000",
+    "label": "〜5,000円/月",
+    "max_price": 2500,
+    "description": "美容液も追加",
+    "routine_type": "full"
+  },
+  {
+    "id": "no_limit",
+    "label": "予算は気にしない",
+    "max_price": null,
+    "description": "プチプラ内で最適な商品を提案",
+    "routine_type": "full"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "dryness",
+    "name": "乾燥",
+    "description": "肌のうるおい不足、カサつき",
+    "serum_count": 2,
+    "safe_count": 2,
+    "recommended_ingredients": ["セラミド", "ヒアルロン酸", "スクワラン"],
+    "sensitive_alternatives": null
+  },
+  {
+    "id": "pores",
+    "name": "毛穴",
+    "description": "毛穴の開き、黒ずみ",
+    "serum_count": 3,
+    "safe_count": 0,
+    "recommended_ingredients": ["ナイアシンアミド", "ビタミンC誘導体", "レチノール"],
+    "sensitive_alternatives": ["ナイアシンアミド低濃度", "アゼライン酸"]
+  },
+  {
+    "id": "acne",
+    "name": "ニキビ",
+    "description": "ニキビ・吹き出物",
+    "serum_count": 3,
+    "safe_count": 1,
+    "recommended_ingredients": ["サリチル酸", "ナイアシンアミド", "グリチルリチン酸"],
+    "sensitive_alternatives": ["グリチルリチン酸ジカリウム"]
+  },
+  {
+    "id": "dullness",
+    "name": "くすみ",
+    "description": "肌のくすみ、トーンダウン",
+    "serum_count": 3,
+    "safe_count": 1,
+    "recommended_ingredients": ["ビタミンC誘導体", "ナイアシンアミド", "トラネキサム酸"],
+    "sensitive_alternatives": ["ナイアシンアミド"]
+  },
+  {
+    "id": "spots",
+    "name": "シミ",
+    "description": "シミ・そばかすが気になる",
+    "serum_count": 2,
+    "safe_count": 1,
+    "recommended_ingredients": ["トラネキサム酸", "ビタミンC誘導体", "アルブチン"],
+    "sensitive_alternatives": ["トラネキサム酸"]
+  },
+  {
+    "id": "aging",
+    "name": "ハリ不足",
+    "description": "ハリ・弾力の低下",
+    "serum_count": 2,
+    "safe_count": 2,
+    "recommended_ingredients": ["レチノール", "コラーゲン", "ナイアシンアミド"],
+    "sensitive_alternatives": ["ナイアシンアミド", "コラーゲン"]
+  },
+  {
+    "id": "redness",
+    "name": "赤み",
+    "description": "肌の赤み、炎症",
+    "serum_count": 2,
+    "safe_count": 2,
+    "recommended_ingredients": ["CICA", "グリチルリチン酸", "アラントイン"],
+    "sensitive_alternatives": null
+  },
+  {
+    "id": "oiliness",
+    "name": "テカリ",
+    "description": "皮脂によるテカリ・ベタつき",
+    "serum_count": 2,
+    "safe_count": 0,
+    "recommended_ingredients": ["ナイアシンアミド", "ビタミンC誘導体", "ライスパワーNo.6"],
+    "sensitive_alternatives": ["ナイアシンアミド低濃度"]
+  }
+]
